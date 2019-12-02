@@ -1,0 +1,141 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Seznam počítačů";
+}
+
+<br />
+<form asp-page="./Index" method="get">
+    <div class="form-actions text-info">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
+
+<br />
+<form method="post">
+    @if (Model.Computers.Count() > 0)
+    {
+        <br /><br />
+        <table class="table table-striped table-bordered">
+            <tr class="table-secondary" style="background-color:grey; color:white">
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.IdSort"
+                       asp-route-currentFilter="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().Id)
+                    </a>
+                </th>
+                <th>
+                    <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort"
+                       asp-route-currentFilter="@Model.CurrentFilter">
+                        @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().Name)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().Specifications)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().RamSize)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().DiskSize)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().IsBroken)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().Room)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Computers.FirstOrDefault().RoomId)
+                </th>
+            </tr>
+            @foreach (var item in Model.Computers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Specifications)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.RamSize)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.DiskSize)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.IsBroken)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Room)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.RoomId)
+                    </td>
+
+                    @*<td>
+                            <button asp-page-handler="Delete" asp-route-id="@item.Id"
+                                    onclick="return confirm('Are you sure you want to delete this book?');"
+                                    class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                            <a asp-route-id="@item.Id" asp-page="Edit" class="btn btn-success btn-sm">Edit</a>
+                        </td>*@
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>
+            No Computers available.
+        </p>
+    }
+</form>
+@*<form asp-page="./Index" method="get" class="form-inline">
+            <label class="sr-only" for="Search">Filtr</label>
+            <select name="" class="form-control mb-2 mr-sm-2" asp-for="" asp-items="">
+                <option value="">-- libovolná --</option>
+            </select>
+            <input type="text" name="NameFilter" class="form-control mb-2 mr-sm-2" asp-for="" />
+            <input type="submit" value="Search" class="btn btn-primary mb-2 mr-1" /> <a asp-page="./Index" class="btn btn-secondary mb-2">Vše</a>
+        </form>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>
+                    <a
+                       asp-page="./Index"
+                       >
+                        @Html.DisplayNameFor(model => model.Computers[0].)
+                    </a>
+                </th>
+                <th>@Html.DisplayNameFor(model => model.Computers[0].)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Computers)
+            {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.)</td>
+
+            </tr>
+            }
+        </tbody>
+    </table>*@
